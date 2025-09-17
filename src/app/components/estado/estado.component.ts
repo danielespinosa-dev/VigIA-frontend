@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment'; // Importa el environment
 
 @Component({
   selector: 'app-estado',
@@ -21,7 +22,7 @@ export class EstadoComponent {
   }
 
   getSolicitudes(): void {
-    this.http.get<any[]>('http://127.0.0.1:8000/vigia/solicitudes')
+    this.http.get<any[]>(`${environment.apiUrl}/vigia/solicitudes`)
       .subscribe({
         next: (data) => {
           this.solicitudes = data;
@@ -39,7 +40,7 @@ export class EstadoComponent {
 
   eliminarSolicitud(id: string): void {
   if (!confirm('¿Seguro que deseas eliminar esta solicitud?')) return;
-  this.http.delete(`http://127.0.0.1:8000/vigia/solicitud/${id}`)
+  this.http.delete(`${environment.apiUrl}/vigia/solicitud/${id}`)
     .subscribe({
       next: () => {
         this.solicitudes = this.solicitudes.filter(s => s.SolicitudID !== id);

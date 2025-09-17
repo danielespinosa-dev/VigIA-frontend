@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment'; // Importa el environment
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -52,7 +54,7 @@ export class RegistroComponent {
     }
   };
 
-  this.http.post<any>('http://127.0.0.1:8000/vigia/solicitud', solicitud)
+  this.http.post<any>(`${environment.apiUrl}/vigia/solicitud`, solicitud)
     .subscribe({
       next: (response) => {
         this.modalMessage = `Solicitud creada exitosamente. ID: ${response.SolicitudID}`;
