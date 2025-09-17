@@ -1,0 +1,60 @@
+body {
+  background-color: #121212;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+
+h2 {
+  color: #ff007f;
+}
+
+.card {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.pending {
+  color: #ff9800;
+}
+
+.status.done {
+  color: #4caf50;
+}
+
+.status.error {
+  color: #f44336;
+}
+
+.dimension-status {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dimension-status span {
+  font-size: 0.8em;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: #2a2a2a;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+table th,
+table td {
+  border-bottom: 1px solid #333;
+  padding: 8px;
+  text-align: left;
+}
