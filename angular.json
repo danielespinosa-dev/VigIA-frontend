@@ -11,6 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/",
             "outputPath": "dist/vigia-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -27,6 +28,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/src/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -36,7 +38,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -45,8 +46,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2kb",
-                  "maximumError": "5kb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "600kb"
                 }
               ]
             }
