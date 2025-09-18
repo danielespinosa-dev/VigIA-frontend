@@ -34,9 +34,31 @@ export class EstadoComponent {
       });
   }
 
-  verInforme(id: string) {
-    // Implementa aquí la lógica para ver el informe
-  }
+  // ...existing code...
+informeVisible: boolean = false;
+informeData: any = null;
+informeTab: string = 'resumen';
+
+verInforme(id: string) {
+  this.http.get<any>(`${environment.apiUrl}/vigia/solicitud/${id}`)
+    .subscribe({
+      next: (data) => {
+        this.informeData = data;
+        this.informeTab = 'resumen';
+        this.informeVisible = true;
+      },
+      error: (err) => {
+        alert('Error al consultar el informe');
+        console.error('Error al consultar informe', err);
+      }
+    });
+}
+
+cerrarInforme() {
+  this.informeVisible = false;
+  this.informeData = null;
+}
+// ...existing code...
 
   eliminarSolicitud(id: string): void {
   if (!confirm('¿Seguro que deseas eliminar esta solicitud?')) return;

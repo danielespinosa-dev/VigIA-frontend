@@ -1,13 +1,13 @@
-# VigIA Comfama Angular Project
+# SostenIA Comfama Angular Project
 
 ## Overview
-VigIA Comfama is an Angular application designed to facilitate the registration and management of sustainability evaluations for suppliers. The application leverages a Python backend to handle data processing and service requests.
+SostenIA Comfama is an Angular application designed to facilitate the registration and management of sustainability evaluations for suppliers. The application leverages a Python backend to handle data processing and service requests.
 
 ## Project Structure
 The project is organized as follows:
 
 ```
-vigia-angular
+SostenIA-angular
 ├── src
 │   ├── app
 │   │   ├── components

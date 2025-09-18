@@ -9,6 +9,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { EstadoComponent } from './components/estado/estado.component';
 import { InformeComponent } from './components/informe/informe.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ParseRevisionesPipe } from './pipes/parse-revisiones.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     BienvenidaComponent,
     RegistroComponent,
     EstadoComponent,
-    InformeComponent
+    InformeComponent,
+    ParseRevisionesPipe
   ],
   imports: [
     BrowserModule,

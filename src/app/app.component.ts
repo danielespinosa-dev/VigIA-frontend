@@ -7,7 +7,7 @@ import { SectionService } from './services/section.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'VigIA Comfama';
+  title = 'SostenIA Comfama';
   currentSection = 'bienvenida';
 
   constructor(private sectionService: SectionService) {}

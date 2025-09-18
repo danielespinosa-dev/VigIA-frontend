@@ -46,3 +46,100 @@
   </table>
   <p *ngIf="solicitudes.length === 0">No se encontraron solicitudes.</p>
 </div>
+<!-- Agrega esto al final de tu estado.component.html -->
+<div *ngIf="informeVisible" class="modal">
+  <div class="modal-content informe-modal">
+    <span class="close" (click)="cerrarInforme()">&times;</span>
+    <h2>Informe de Solicitud</h2>
+    <div class="tabs">
+      <button [class.active]="informeTab==='resumen'" (click)="informeTab='resumen'">Resumen</button>
+      <button [class.active]="informeTab==='ambiental'" (click)="informeTab='ambiental'">Ambiental</button>
+      <button [class.active]="informeTab==='social'" (click)="informeTab='social'">Social</button>
+      <button [class.active]="informeTab==='economica'" (click)="informeTab='economica'">Económica</button>
+    </div>
+    <div *ngIf="informeTab==='resumen'">
+      <table class="info-table">
+        <tr><th>Código Proyecto</th><td>{{informeData.CodigoProyecto}}</td></tr>
+        <tr><th>Proveedor</th><td>{{informeData.ProveedorNombre}}</td></tr>
+        <tr><th>NIT</th><td>{{informeData.ProveedorNIT}}</td></tr>
+        <tr><th>Fecha Creación</th><td>{{informeData.FechaCreacion | date:'medium'}}</td></tr>
+        <tr><th>Estado General</th><td>{{informeData.EstadoGeneral}}</td></tr>
+        <tr><th>Usuario Solicitante</th><td>{{informeData.UsuarioSolicitante}}</td></tr>
+        <tr><th>Archivo Excel</th><td>{{informeData.FuenteExcelPath}}</td></tr>
+        <tr><th>Anexos</th><td>
+          <ul>
+            <li *ngFor="let anexo of informeData.Anexos">{{anexo}}</li>
+          </ul>
+        </td></tr>
+        <tr>
+          <th>Estado Dimensiones</th>
+          <td>
+            <span class="badge ambiental" [class.done]="informeData.Estado?.ambiental==='done'">Ambiental</span>
+            <span class="badge social" [class.done]="informeData.Estado?.social==='done'">Social</span>
+            <span class="badge economica" [class.done]="informeData.Estado?.economica==='done'">Económica</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="informeTab==='ambiental'">
+      <h3>Evaluación Ambiental</h3>
+      <div *ngFor="let eval of informeData.EvaluacionAmbiental">
+        <div *ngIf="eval.required_action">
+          <div *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
+            <div *ngIf="call.function">
+              <div *ngFor="let rev of (call.function.arguments | parseRevisiones)">
+                <div class="pregunta-panel">
+                  <strong>{{rev.pregunta}}</strong>
+                  <div>Respuesta: <b>{{rev.respuesta_proveedor}}</b></div>
+                  <div>Resultado: {{rev.resultado_por_pregunta}}</div>
+                  <div>Sugerencia: <em>{{rev.sugerencia}}</em></div>
+                  <div>Observaciones: {{rev.observaciones_internas}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="informeTab==='social'">
+      <h3>Evaluación Social</h3>
+      <div *ngFor="let eval of informeData.EvaluacionSocial">
+        <div *ngIf="eval.required_action">
+          <div *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
+            <div *ngIf="call.function">
+              <div *ngFor="let rev of (call.function.arguments | parseRevisiones)">
+                <div class="pregunta-panel">
+                  <strong>{{rev.pregunta}}</strong>
+                  <div>Respuesta: <b>{{rev.respuesta_proveedor}}</b></div>
+                  <div>Resultado: {{rev.resultado_por_pregunta}}</div>
+                  <div>Sugerencia: <em>{{rev.sugerencia}}</em></div>
+                  <div>Observaciones: {{rev.observaciones_internas}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="informeTab==='economica'">
+      <h3>Evaluación Económica</h3>
+      <div *ngFor="let eval of informeData.EvaluacionEconomica">
+        <div *ngIf="eval.required_action">
+          <div *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
+            <div *ngIf="call.function">
+              <div *ngFor="let rev of (call.function.arguments | parseRevisiones)">
+                <div class="pregunta-panel">
+                  <strong>{{rev.pregunta}}</strong>
+                  <div>Respuesta: <b>{{rev.respuesta_proveedor}}</b></div>
+                  <div>Resultado: {{rev.resultado_por_pregunta}}</div>
+                  <div>Sugerencia: <em>{{rev.sugerencia}}</em></div>
+                  <div>Observaciones: {{rev.observaciones_internas}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

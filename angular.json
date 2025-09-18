@@ -28,7 +28,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/src/",
+              "baseHref": "/hackathon2025/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

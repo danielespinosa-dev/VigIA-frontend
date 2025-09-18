@@ -29,32 +29,32 @@ export class RegistroComponent {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.anexos = Array.from(input.files);
+      console.log(this.anexos);
     }
   }
 
  constructor(private http: HttpClient) {}
 
   submitForm(): void {
-  const solicitud = {
-    CodigoProyecto: this.codigo,
-    ProveedorNombre: this.proveedor,
-    ProveedorNIT: this.nit,
-    FechaCreacion: new Date().toISOString(),
-    EstadoGeneral: 'Pendiente',
-    UsuarioSolicitante: 'user.hackathon',
-    FuenteExcelPath: this.excelFile ? `archivos/${this.excelFile.name}` : '',
-    StorageFolderPath: 'storage/solicitud1/',
-    PuntajeConsolidado: 85.5,
-    NivelGlobal: 'Alto',
-    FechaFinalizacion: null,
-    Estado: {
-      economica: 'pending',
-      social: 'pending',
-      ambiental: 'pending'
-    }
-  };
+  const formData = new FormData();
+  formData.append('CodigoProyecto', this.codigo);
+  formData.append('ProveedorNombre', this.proveedor);
+  formData.append('ProveedorNIT', this.nit);
+  formData.append('EstadoGeneral', 'pendiente');
+  formData.append('UsuarioSolicitante', 'user-hackathon');
 
-  this.http.post<any>(`${environment.apiUrl}/vigia/solicitud`, solicitud)
+  if (this.excelFile) {
+    formData.append('excel_file', this.excelFile, this.excelFile.name);
+  }
+
+  // Si anexos tiene archivos, agrégalos todos bajo el mismo campo 'anexos'
+  if (this.anexos.length > 0) {
+    for (const file of this.anexos) {
+      formData.append('anexos', file, file.name);
+    }
+  }
+
+  this.http.post<any>(`${environment.apiUrl}/vigia/solicitud`, formData)
     .subscribe({
       next: (response) => {
         this.modalMessage = `Solicitud creada exitosamente. ID: ${response.SolicitudID}`;
@@ -81,6 +81,7 @@ limpiarFormulario(): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.selectedFiles = Array.from(input.files);
+      this.anexos = this.selectedFiles; // Asegura que anexos tenga los archivos seleccionados
     }
   }
 
@@ -88,6 +89,7 @@ limpiarFormulario(): void {
     event.preventDefault();
     if (event.dataTransfer && event.dataTransfer.files) {
       this.selectedFiles = Array.from(event.dataTransfer.files);
+      this.anexos = this.selectedFiles; // Asegura que anexos tenga los archivos seleccionados
     }
   }
 

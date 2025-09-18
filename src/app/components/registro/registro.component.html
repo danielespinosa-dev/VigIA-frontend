@@ -22,6 +22,29 @@
 <div *ngIf="modalVisible" class="modal">
   <div class="modal-content">
     <span (click)="modalVisible = false" class="close">&times;</span>
+    <div class="asistentes-paneles">
+      <div class="asistente-panel">
+        <img src="assets/asistente1.png" alt="Asistente 1" class="asistente-img">
+        <div class="dimension-label ambiental">Dimensión Ambiental</div>
+      </div>
+      <div class="asistente-panel">
+        <img src="assets/asistente2.png" alt="Asistente 2" class="asistente-img">
+        <div class="dimension-label social">Dimensión Social</div>
+      </div>
+      <div class="asistente-panel">
+        <img src="assets/asistente3.png" alt="Asistente 3" class="asistente-img">
+        <div class="dimension-label economica">Dimensión Económica</div>
+      </div>
+    </div>
+    <p class="procesando-msg">
+      <strong>¡Tus asistentes ya iniciaron el procesamiento de la revisión!</strong>
+    </p>
+    <div class="loading-spinner">
+      <div class="spinner-dot"></div>
+      <div class="spinner-dot"></div>
+      <div class="spinner-dot"></div>
+      <div class="spinner-dot"></div>
+    </div>
     <p>{{ modalMessage }}</p>
   </div>
 </div>
