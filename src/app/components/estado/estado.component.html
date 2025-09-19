@@ -63,6 +63,7 @@
       <button [class.active]="informeTab==='social'" (click)="informeTab='social'">Social</button>
       <button [class.active]="informeTab==='economica'" (click)="informeTab='economica'">Económica</button>
       <button [class.active]="informeTab==='reporte'" (click)="informeTab='reporte'">Reporte</button>
+      <button [class.active]="informeTab==='graficas'" (click)="cambiarTab('graficas')">Gráficas</button>
       <button class="btn" style="margin-left:auto;" (click)="imprimirInformeCompleto()">Imprimir Sección</button>
     </div>
     <div id="modal-informe-completo"> 
@@ -280,5 +281,21 @@
       <span><b>{{informeData.RespuestaSocial}}</b></span>
       <h3>Analisis Economico:</h3>
       <span><b>{{informeData.RespuestaEconomica}}</b></span>
-  </div>
+  
+    </div>
+    <div *ngIf="informeTab==='graficas'" class="graficas-reporte">
+      <h3>Visualización de Resultados</h3>
+      <!-- Pie chart por dimensión -->
+      <div style="max-width: 420px; margin-bottom: 32px;">
+        <canvas id="pieDimensiones"></canvas>
+      </div>
+      <!-- Bar chart por criterio (ejemplo: puntaje promedio por criterio) -->
+      <div style="max-width: 600px; margin-bottom: 32px;">
+        <canvas id="barCriterios"></canvas>
+      </div>
+      <!-- Bar chart por resultado (ejemplo: cantidad de preguntas por resultado) -->
+      <div style="max-width: 600px;">
+        <canvas id="barResultados"></canvas>
+      </div>
+    </div>
   </div>
