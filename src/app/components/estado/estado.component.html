@@ -56,6 +56,7 @@
       <button [class.active]="informeTab==='ambiental'" (click)="informeTab='ambiental'">Ambiental</button>
       <button [class.active]="informeTab==='social'" (click)="informeTab='social'">Social</button>
       <button [class.active]="informeTab==='economica'" (click)="informeTab='economica'">Económica</button>
+      <button [class.active]="informeTab==='reporte'" (click)="informeTab='reporte'">Reporte</button>
     </div>
     <div *ngIf="informeTab==='resumen'">
       <table class="info-table">
@@ -68,7 +69,7 @@
         <tr><th>Archivo Excel</th><td>{{informeData.FuenteExcelPath}}</td></tr>
         <tr><th>Anexos</th><td>
           <ul>
-            <li *ngFor="let anexo of informeData.Anexos">{{anexo}}</li>
+            <li *ngFor="let anexo of informeData.Anexos">{{anexo.filename}}</li>
           </ul>
         </td></tr>
         <tr>
@@ -83,63 +84,196 @@
     </div>
     <div *ngIf="informeTab==='ambiental'">
       <h3>Evaluación Ambiental</h3>
+      
       <div *ngFor="let eval of informeData.EvaluacionAmbiental">
         <div *ngIf="eval.required_action">
           <div *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
             <div *ngIf="call.function">
+              <!-- Mejora la visualización de cada revisión en las pestañas ambiental, social y económica -->
               <div *ngFor="let rev of (call.function.arguments | parseRevisiones)">
                 <div class="pregunta-panel">
-                  <strong>{{rev.pregunta}}</strong>
-                  <div>Respuesta: <b>{{rev.respuesta_proveedor}}</b></div>
-                  <div>Resultado: {{rev.resultado_por_pregunta}}</div>
-                  <div>Sugerencia: <em>{{rev.sugerencia}}</em></div>
-                  <div>Observaciones: {{rev.observaciones_internas}}</div>
+                  <!-- Pregunta destacada -->
+                  <div class="pregunta-box">
+                    <strong>{{rev.pregunta}}</strong>
+                  </div>
+                  <!-- Respuesta y puntaje proveedor -->
+                  <div class="respuesta-box">
+                    <span><b>Respuesta:</b> {{rev.respuesta_proveedor}}</span>
+                    <span class="puntaje-proveedor"><b>Puntaje Proveedor:</b> {{rev.Puntaje_respuesta_proveedor}}</span>
+                  </div>
+                  <!-- Resultado del análisis IA -->
+                  <div class="analisis-box">
+                    <span><b>Puntaje Asistente:</b> {{rev.Puntaje_respuesta_asistente}}</span>
+                    <span><b>Resultado:</b> {{rev.resultado_por_pregunta}}</span>
+                    <span><b>Sugerencia:</b> <em>{{rev.sugerencia}}</em></span>
+                    <span><b>Observaciones:</b> {{rev.observaciones_internas}}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <span><b>{{informeData.RespuestaAmbiental}}</b></span>
     </div>
     <div *ngIf="informeTab==='social'">
       <h3>Evaluación Social</h3>
+      
       <div *ngFor="let eval of informeData.EvaluacionSocial">
         <div *ngIf="eval.required_action">
           <div *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
             <div *ngIf="call.function">
+              <!-- Mejora la visualización de cada revisión en las pestañas ambiental, social y económica -->
               <div *ngFor="let rev of (call.function.arguments | parseRevisiones)">
                 <div class="pregunta-panel">
-                  <strong>{{rev.pregunta}}</strong>
-                  <div>Respuesta: <b>{{rev.respuesta_proveedor}}</b></div>
-                  <div>Resultado: {{rev.resultado_por_pregunta}}</div>
-                  <div>Sugerencia: <em>{{rev.sugerencia}}</em></div>
-                  <div>Observaciones: {{rev.observaciones_internas}}</div>
+                  <!-- Pregunta destacada -->
+                  <div class="pregunta-box">
+                    <strong>{{rev.pregunta}}</strong>
+                  </div>
+                  <!-- Respuesta y puntaje proveedor -->
+                  <div class="respuesta-box">
+                    <span><b>Respuesta:</b> {{rev.respuesta_proveedor}}</span>
+                    <span class="puntaje-proveedor"><b>Puntaje Proveedor:</b> {{rev.Puntaje_respuesta_proveedor}}</span>
+                  </div>
+                  <!-- Resultado del análisis IA -->
+                  <div class="analisis-box">
+                    <span><b>Puntaje Asistente:</b> {{rev.Puntaje_respuesta_asistente}}</span>
+                    <span><b>Resultado:</b> {{rev.resultado_por_pregunta}}</span>
+                    <span><b>Sugerencia:</b> <em>{{rev.sugerencia}}</em></span>
+                    <span><b>Observaciones:</b> {{rev.observaciones_internas}}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <span><b>{{informeData.RespuestaSocial}}</b></span>
     </div>
     <div *ngIf="informeTab==='economica'">
       <h3>Evaluación Económica</h3>
+      
       <div *ngFor="let eval of informeData.EvaluacionEconomica">
         <div *ngIf="eval.required_action">
           <div *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
             <div *ngIf="call.function">
+              <!-- Mejora la visualización de cada revisión en las pestañas ambiental, social y económica -->
               <div *ngFor="let rev of (call.function.arguments | parseRevisiones)">
                 <div class="pregunta-panel">
-                  <strong>{{rev.pregunta}}</strong>
-                  <div>Respuesta: <b>{{rev.respuesta_proveedor}}</b></div>
-                  <div>Resultado: {{rev.resultado_por_pregunta}}</div>
-                  <div>Sugerencia: <em>{{rev.sugerencia}}</em></div>
-                  <div>Observaciones: {{rev.observaciones_internas}}</div>
+                  <!-- Pregunta destacada -->
+                  <div class="pregunta-box">
+                    <strong>{{rev.pregunta}}</strong>
+                  </div>
+                  <!-- Respuesta y puntaje proveedor -->
+                  <div class="respuesta-box">
+                    <span><b>Respuesta:</b> {{rev.respuesta_proveedor}}</span>
+                    <span class="puntaje-proveedor"><b>Puntaje Proveedor:</b> {{rev.Puntaje_respuesta_proveedor}}</span>
+                  </div>
+                  <!-- Resultado del análisis IA -->
+                  <div class="analisis-box">
+                    <span><b>Puntaje Asistente:</b> {{rev.Puntaje_respuesta_asistente}}</span>
+                    <span><b>Resultado:</b> {{rev.resultado_por_pregunta}}</span>
+                    <span><b>Sugerencia:</b> <em>{{rev.sugerencia}}</em></span>
+                    <span><b>Observaciones:</b> {{rev.observaciones_internas}}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <span><b>{{informeData.RespuestaEconomica}}</b></span>
     </div>
+    <!-- Nueva sección Reporte -->
+<div *ngIf="informeTab==='reporte'" id="reporte-consolidado">
+  <img src="assets/logo.png" alt="SostenIA" class="asistente-img">
+  <img src="https://images.ctfassets.net/xysarnlrhe1d/4KaYTIvy6xOJJBHMqu6YSc/fa061f032abbb51d9dbb9463a4afc3a0/logocomfama1.png?w=196&h=36&q=50&fm=webp" alt="Logo Comfama">
+  <h3>Reporte Consolidado de Evaluación</h3>
+  <button class="btn" (click)="imprimirReporte()">Imprimir PDF</button>
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>Dimensión</th>
+        <th>Criterio</th>
+        <th>Pregunta</th>
+        <th>Respuesta Proveedor</th>
+        <th>Puntaje Proveedor</th>
+        <th>Puntaje Asistente</th>
+        <th>Resultado</th>
+        <th>Sugerencia</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Ambiental -->
+      <ng-container *ngFor="let eval of informeData.EvaluacionAmbiental">
+        <ng-container *ngIf="eval.required_action">
+          <ng-container *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
+            <ng-container *ngIf="call.function">
+              <tr *ngFor="let rev of (call.function.arguments | parseRevisiones)">
+                <td>Ambiental</td>
+                <td>{{rev.criterio}}</td>
+                <td>{{rev.pregunta}}</td>
+                <td>{{rev.respuesta_proveedor}}</td>
+                <td>{{rev.Puntaje_respuesta_proveedor}}</td>
+                <td>{{rev.Puntaje_respuesta_asistente}}</td>
+                <td>{{rev.resultado_por_pregunta}}</td>
+                <td><em>{{rev.sugerencia}}</em></td>
+                <td>{{rev.observaciones_internas}}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <!-- Social -->
+      <ng-container *ngFor="let eval of informeData.EvaluacionSocial">
+        <ng-container *ngIf="eval.required_action">
+          <ng-container *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
+            <ng-container *ngIf="call.function">
+              <tr *ngFor="let rev of (call.function.arguments | parseRevisiones)">
+                <td>Social</td>
+                <td>{{rev.criterio}}</td>
+                <td>{{rev.pregunta}}</td>
+                <td>{{rev.respuesta_proveedor}}</td>
+                <td>{{rev.Puntaje_respuesta_proveedor}}</td>
+                <td>{{rev.Puntaje_respuesta_asistente}}</td>
+                <td>{{rev.resultado_por_pregunta}}</td>
+                <td><em>{{rev.sugerencia}}</em></td>
+                <td>{{rev.observaciones_internas}}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <!-- Económica -->
+      <ng-container *ngFor="let eval of informeData.EvaluacionEconomica">
+        <ng-container *ngIf="eval.required_action">
+          <ng-container *ngFor="let call of eval.required_action.submit_tool_outputs.tool_calls">
+            <ng-container *ngIf="call.function">
+              <tr *ngFor="let rev of (call.function.arguments | parseRevisiones)">
+                <td>Económica</td>
+                <td>{{rev.criterio}}</td>
+                <td>{{rev.pregunta}}</td>
+                <td>{{rev.respuesta_proveedor}}</td>
+                <td>{{rev.Puntaje_respuesta_proveedor}}</td>
+                <td>{{rev.Puntaje_respuesta_asistente}}</td>
+                <td>{{rev.resultado_por_pregunta}}</td>
+                <td><em>{{rev.sugerencia}}</em></td>
+                <td>{{rev.observaciones_internas}}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+  <h3>Analisis Ambiental:</h3>
+  <span><b>{{informeData.RespuestaAmbiental}}</b></span>
+  <h3>Analisis Social:</h3>
+  <span><b>{{informeData.RespuestaSocial}}</b></span>
+  <h3>Analisis Economico:</h3>
+  <span><b>{{informeData.RespuestaEconomica}}</b></span>
+</div>
+<!-- ...existing code... -->
   </div>
 </div>

@@ -66,7 +66,6 @@ input, select { width: 100%; padding: 6px; margin: 6px 0; border-radius: 5px; bo
   from { transform: translateY(-40px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-/* ...existing code... */
 .asistentes-container {
   display: flex;
   justify-content: center;
@@ -110,8 +109,6 @@ input, select { width: 100%; padding: 6px; margin: 6px 0; border-radius: 5px; bo
   0% { transform: translateY(0); opacity: 0.7; }
   100% { transform: translateY(-18px); opacity: 1; }
 }
-/* ...existing code... */
-/* ...existing code... */
 .asistentes-paneles {
   display: flex;
   justify-content: center;
@@ -147,4 +144,29 @@ input, select { width: 100%; padding: 6px; margin: 6px 0; border-radius: 5px; bo
   background: #fff8e1;
   color: #fbc02d;
 }
-/* ...existing code... */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0;
+  font-size: 1.1em;
+  justify-content: center;
+}
+
+.spinner-dot {
+  width: 12px;
+  height: 12px;
+  background: #ff007f;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spinner-bounce 1s infinite ease-in-out;
+}
+
+.spinner-dot:nth-child(2) { animation-delay: 0.2s; }
+.spinner-dot:nth-child(3) { animation-delay: 0.4s; }
+.spinner-dot:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes spinner-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(-12px); opacity: 1; }
+}

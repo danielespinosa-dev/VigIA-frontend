@@ -17,6 +17,7 @@ export class RegistroComponent {
   selectedFiles: File[] = [];
   modalVisible: boolean = false;
   modalMessage: string = '';
+  loading: boolean = false; // <--- NUEVA VARIABLE
 
   handleFileInput(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -36,36 +37,39 @@ export class RegistroComponent {
  constructor(private http: HttpClient) {}
 
   submitForm(): void {
-  const formData = new FormData();
-  formData.append('CodigoProyecto', this.codigo);
-  formData.append('ProveedorNombre', this.proveedor);
-  formData.append('ProveedorNIT', this.nit);
-  formData.append('EstadoGeneral', 'pendiente');
-  formData.append('UsuarioSolicitante', 'user-hackathon');
+    this.loading = true; // <--- INICIA LOADING
+    const formData = new FormData();
+    formData.append('CodigoProyecto', this.codigo);
+    formData.append('ProveedorNombre', this.proveedor);
+    formData.append('ProveedorNIT', this.nit);
+    formData.append('EstadoGeneral', 'pendiente');
+    formData.append('UsuarioSolicitante', 'user-hackathon');
 
-  if (this.excelFile) {
-    formData.append('excel_file', this.excelFile, this.excelFile.name);
-  }
-
-  // Si anexos tiene archivos, agrégalos todos bajo el mismo campo 'anexos'
-  if (this.anexos.length > 0) {
-    for (const file of this.anexos) {
-      formData.append('anexos', file, file.name);
+    if (this.excelFile) {
+      formData.append('excel_file', this.excelFile, this.excelFile.name);
     }
-  }
 
-  this.http.post<any>(`${environment.apiUrl}/vigia/solicitud`, formData)
-    .subscribe({
-      next: (response) => {
-        this.modalMessage = `Solicitud creada exitosamente. ID: ${response.SolicitudID}`;
-        this.modalVisible = true;
-        this.limpiarFormulario();
-      },
-      error: (error) => {
-        this.modalMessage = 'Error al crear la solicitud.';
-        this.modalVisible = true;
+    // Si anexos tiene archivos, agrégalos todos bajo el mismo campo 'anexos'
+    if (this.anexos.length > 0) {
+      for (const file of this.anexos) {
+        formData.append('anexos', file, file.name);
       }
-    });
+    }
+
+    this.http.post<any>(`${environment.apiUrl}/vigia/solicitud`, formData)
+      .subscribe({
+        next: (response) => {
+          this.loading = false; // <--- DETIENE LOADING
+          this.modalMessage = `Solicitud creada exitosamente. ID: ${response.SolicitudID}`;
+          this.modalVisible = true;
+          this.limpiarFormulario();
+        },
+        error: (error) => {
+          this.loading = false; // <--- DETIENE LOADING
+          this.modalMessage = 'Error al crear la solicitud.';
+          this.modalVisible = true;
+        }
+      });
 }
 
 limpiarFormulario(): void {

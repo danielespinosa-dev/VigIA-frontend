@@ -4,8 +4,24 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
-h2 {
+h2, h3 {
   color: #ff007f;
+  margin-top: 0;
+}
+
+.btn {
+  background-color: #ff007f;
+  border: none;
+  padding: 8px 15px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.98em;
+  margin-bottom: 10px;
+}
+.btn:hover {
+  background-color: #e91e63;
 }
 
 .card {
@@ -58,62 +74,98 @@ table td {
   padding: 8px;
   text-align: left;
 }
-/* Agrega a tu estado.component.css */
-.modal { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:1000; }
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
 .modal-content.informe-modal {
-  background: #232323;           /* Fondo oscuro */
-  color: #fff;                   /* Texto claro */
-  padding: 32px;
-  border-radius: 12px;
-  max-width: 900px;
-  width: 95vw;
-  max-height: 90vh;
-  overflow: auto;
+  background: #232323;
+  color: #fff;
+  padding: 32px 24px 24px 24px;
+  border-radius: 16px;
+  max-width: 1100px;
+  width: 98vw;
+  max-height: 95vh;
+  overflow-y: auto;
   position: relative;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.7);
-  border: 1px solid #ff007f;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+  border: 2px solid #ff007f;
 }
 
 .close {
   position: absolute;
-  top: 16px;
-  right: 24px;
-  font-size: 2em;
+  top: 18px;
+  right: 28px;
+  font-size: 2.2em;
   cursor: pointer;
   color: #ff007f;
   background: transparent;
   border: none;
   transition: color 0.2s;
+  z-index: 10;
 }
-
 .close:hover {
   color: #fff;
   background: #ff007f;
   border-radius: 50%;
-  padding: 0 6px;
+  padding: 0 8px;
 }
 
-.tabs { display:flex; gap:8px; margin-bottom:18px; }
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
 .tabs button {
-  padding: 8px 18px;
+  padding: 10px 22px;
   border: none;
   background: #2a2a2a;
   color: #fff;
-  border-radius: 8px 8px 0 0;
+  border-radius: 10px 10px 0 0;
   cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
   transition: background 0.2s, color 0.2s;
 }
-
 .tabs button.active {
   background: #ff007f;
   color: #fff;
+  font-weight: bold;
 }
 
-.info-table { width:100%; border-collapse:collapse; margin-bottom:18px; }
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+  font-size: 0.98em;
+  background: #232323;
+}
 .info-table th, .info-table td {
   text-align: left;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-bottom: 1px solid #333;
+  vertical-align: top;
+}
+.info-table th {
+  background: #ff007f;
+  color: #fff;
+  font-weight: bold;
+}
+.info-table tr:nth-child(even) td {
+  background: #262626;
+}
+.info-table tr:hover td {
+  background: #2a2a2a;
 }
 
 .badge {
@@ -125,7 +177,6 @@ table td {
   background: #333;
   color: #fff;
 }
-
 .badge.ambiental { background: #388e3c; }
 .badge.social { background: #1976d2; }
 .badge.economica { background: #fbc02d; color: #232323; }
@@ -133,9 +184,79 @@ table td {
 
 .pregunta-panel {
   background: #181818;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  padding: 10px 14px;
-  color: #fff;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  padding: 16px 18px;
   border: 1px solid #333;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.pregunta-box {
+  background: #ff007f;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 7px;
+  font-size: 1.08em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 6px rgba(255,0,127,0.12);
+}
+
+.respuesta-box {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  background: #232323;
+  padding: 8px 14px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #fff;
+}
+
+.puntaje-proveedor {
+  background: #388e3c;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.98em;
+}
+
+.analisis-box {
+  background: #222;
+  padding: 10px 14px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.98em;
+  color: #fff;
+  border-left: 4px solid #ff007f;
+}
+
+@media (max-width: 900px) {
+  .modal-content.informe-modal {
+    padding: 16px 4vw;
+    max-width: 99vw;
+  }
+  .info-table th, .info-table td {
+    padding: 6px 4px;
+    font-size: 0.95em;
+  }
+  .pregunta-panel {
+    padding: 10px 6px;
+  }
+}
+
+ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.procesando-msg {
+  margin: 12px 0;
+  font-size: 1.05em;
+  color: #fff;
 }

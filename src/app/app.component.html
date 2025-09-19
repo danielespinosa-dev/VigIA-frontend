@@ -1,5 +1,6 @@
 <div class="sidebar">
-  <img src="https://images.ctfassets.net/xysarnlrhe1d/4KaYTIvy6xOJJBHMqu6YSc/fa061f032abbb51d9dbb9463a4afc3a0/logocomfama1.png?w=196&h=36&q=50&fm=webp" alt="Logo Comfama">
+  <img src="assets/logo.png" alt="SostenIA" class="asistente-img">
+  
   <button class="menu-btn" [class.active]="currentSection === 'bienvenida'" (click)="showSection('bienvenida')">
     🏠 Inicio
   </button>
@@ -9,15 +10,13 @@
   <button class="menu-btn" [class.active]="currentSection === 'estado'" (click)="showSection('estado')">
     🔍 Consultar Solicitudes
   </button>
-  <button class="menu-btn" [class.active]="currentSection === 'informe'" (click)="showSection('informe')">
-    📊 Informe de Revisión
-  </button>
+<img src="https://images.ctfassets.net/xysarnlrhe1d/4KaYTIvy6xOJJBHMqu6YSc/fa061f032abbb51d9dbb9463a4afc3a0/logocomfama1.png?w=196&h=36&q=50&fm=webp" alt="Logo Comfama">
 </div>
 
 <div class="container">
   <h1>SostenIA Comfama</h1>
+  
   <app-bienvenida *ngIf="currentSection === 'bienvenida'"></app-bienvenida>
   <app-registro *ngIf="currentSection === 'registro'"></app-registro>
   <app-estado *ngIf="currentSection === 'estado'"></app-estado>
-  <app-informe *ngIf="currentSection === 'informe'"></app-informe>
 </div>
