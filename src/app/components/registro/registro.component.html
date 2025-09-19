@@ -1,29 +1,31 @@
-<div class="card">
-  <h2>Registrar nueva solicitud</h2>
-  <p><em>Los archivos cargados serán analizados por asistentes de IA especializados.</em></p>
-  <form id="registroForm" (ngSubmit)="onSubmit()" novalidate>
-    <input type="text" [(ngModel)]="codigo" name="codigo" placeholder="Código de Proyecto" required>
-    <input type="text" [(ngModel)]="nit" name="nit" placeholder="NIT del Proveedor" required>
-    <input type="text" [(ngModel)]="proveedor" name="proveedor" placeholder="Nombre del Proveedor" required>
-    <input type="file" (change)="onFileChange($event)" accept=".xlsx" required>
+<div class="form-center">
+  <div class="card">
+    <h2>Registrar nueva solicitud</h2>
+    <p><em>Los archivos cargados serán analizados por asistentes de IA especializados.</em></p>
+    <form id="registroForm" (ngSubmit)="onSubmit()" novalidate>
+      <input type="text" [(ngModel)]="codigo" name="codigo" placeholder="Código de Proyecto" required>
+      <input type="text" [(ngModel)]="nit" name="nit" placeholder="NIT del Proveedor" required>
+      <input type="text" [(ngModel)]="proveedor" name="proveedor" placeholder="Nombre del Proveedor" required>
+      <input type="file" (change)="onFileChange($event)" accept=".xlsx" required>
 
-    <div id="dropzone" class="dropzone" (click)="fileInput.click()" (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)">
-      <p>Arrastra y suelta tus anexos aquí o haz clic para seleccionarlos</p>
-      <input type="file" #fileInput (change)="onFilesSelected($event)" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" hidden>
-    </div>
-    <ul id="fileList">
-      <li *ngFor="let file of selectedFiles">✔ {{ file.name }}</li>
-    </ul>
+      <div id="dropzone" class="dropzone" (click)="fileInput.click()" (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)">
+        <p>Arrastra y suelta tus anexos aquí o haz clic para seleccionarlos</p>
+        <input type="file" #fileInput (change)="onFilesSelected($event)" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" hidden>
+      </div>
+      <ul id="fileList">
+        <li *ngFor="let file of selectedFiles">✔ {{ file.name }}</li>
+      </ul>
 
-    <button type="submit" class="btn" [disabled]="loading">Enviar</button>
-    <div *ngIf="loading" class="loading-spinner">
-      <span class="spinner-dot"></span>
-      <span class="spinner-dot"></span>
-      <span class="spinner-dot"></span>
-      <span class="spinner-dot"></span>
-      Enviando...
-    </div>
-  </form>
+      <button type="submit" class="btn" [disabled]="loading">Enviar</button>
+      <div *ngIf="loading" class="loading-spinner">
+        <span class="spinner-dot"></span>
+        <span class="spinner-dot"></span>
+        <span class="spinner-dot"></span>
+        <span class="spinner-dot"></span>
+        Enviando...
+      </div>
+    </form>
+  </div>
 </div>
 <!-- Modal simple -->
 <div *ngIf="modalVisible" class="modal">
