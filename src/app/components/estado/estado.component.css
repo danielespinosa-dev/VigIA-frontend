@@ -47,7 +47,9 @@ h2, h3 {
 .status.error {
   color: #f44336;
 }
-
+.status.failed {
+  color: #f44336;
+}
 .dimension-status {
   display: flex;
   gap: 10px;
