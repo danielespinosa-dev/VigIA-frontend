@@ -9,23 +9,29 @@ h2 {
   color: #ff007f;
 }
 
-.card {
-  background-color: #1e1e1e;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+img.asistente-img {
+  display: block;
+  max-width: 700px;
+  width: 90vw;
+  height: auto;
+  margin: 32px auto 24px auto;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px #00ffe744, 0 2px 12px #ff007f44;
+  object-fit: contain;
 }
-/* Puedes poner esto en bienvenida.component.css */
+
 .bienvenida-card {
+  margin: 24px auto 0 auto;
+  max-width: 600px;
+  width: 95vw;
   background: linear-gradient(135deg, #1e1e1e 80%, #ff007f 100%);
   color: #fff;
   border-radius: 20px;
-  box-shadow: 0 6px 32px #ff007f22;
+  box-shadow: 0 8px 32px #ff007f44, 0 2px 12px #00ffe744;
+  border: 2px solid #ff007f;
   padding: 36px 32px 32px 32px;
-  max-width: 600px;
-  margin: 40px auto;
   animation: fadeInUp 1s;
+  position: relative;
 }
 
 .bienvenida-header {
@@ -81,4 +87,15 @@ h2 {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(40px);}
   to { opacity: 1; transform: translateY(0);}
+}
+
+@media (max-width: 700px) {
+  img.asistente-img {
+    max-width: 98vw;
+    margin: 18px auto 12px auto;
+  }
+  .bienvenida-card {
+    padding: 16px 8px;
+    max-width: 99vw;
+  }
 }
